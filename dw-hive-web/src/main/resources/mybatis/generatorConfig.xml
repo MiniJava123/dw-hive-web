@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="/Users/yjyao/.m2/repository/mysql/mysql-connector-java/5.1.31/mysql-connector-java-5.1.31.jar" />
+    <context id="dw-hive-web">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://192.168.8.44:3306/DianPingDW2?autoReconnect=true&amp;autoReconnectForPools=true&amp;useUnicode=true&amp;characterEncoding=utf-8"
+            userId="DianPingDW2" password="ertydfgh" />
+        <javaModelGenerator targetPackage="com.dianping.dw.hive.model" targetProject="dw-hive-web/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.dianping.dw.hive.mapper" targetProject="dw-hive-web/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.dianping.dw.hive.mapper" targetProject="dw-hive-web/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <table tableName="HW_UserPersonalization" domainObjectName="UserPersonalizationDO">
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+            <columnOverride column="ID" property="id" />
+            <columnOverride column="AddTime" property="addTime" />
+            <columnOverride column="UpdateTime" property="updateTime" />
+            <columnOverride column="AdminID" property="adminId" />
+            <columnOverride column="Type" property="type" />
+            <columnOverride column="Value" property="value" />
+        </table>
+        <table tableName="HW_Query" domainObjectName="QueryDO">
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+            <columnOverride column="ID" property="id" />
+            <columnOverride column="AddTime" property="addTime" />
+            <columnOverride column="UpdateTime" property="updateTime" />
+            <columnOverride column="UUID" property="uuid" />
+            <columnOverride column="AdminID" property="adminId" />
+            <columnOverride column="DatabaseName" property="databaseName" />
+            <columnOverride column="QueryEngine" property="queryEngine" />
+            <columnOverride column="Role" property="role" />
+            <columnOverride column="Properties" property="properties" />
+            <columnOverride column="QuerySql" property="querySql" jdbcType="VARCHAR" />
+            <columnOverride column="ExecTime" property="execTime" />
+            <columnOverride column="QueryStatus" property="queryStatus" />
+            <columnOverride column="ResultFilePath" property="resultFilePath" />
+            <columnOverride column="LogPath" property="logPath" />
+            <columnOverride column="CsvPath" property="csvPath" />
+            <columnOverride column="XlsxPath" property="xlsxPath" />
+            <columnOverride column="Detail" property="detail" jdbcType="VARCHAR" />
+        </table>
+        <table tableName="HW_QueryLog" domainObjectName="QueryLogDO">
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+            <columnOverride column="ID" property="id" />
+            <columnOverride column="AddTime" property="addTime" />
+            <columnOverride column="UpdateTime" property="updateTime" />
+            <columnOverride column="UUID" property="uuid" />
+            <columnOverride column="AdminID" property="adminId" />
+            <columnOverride column="DatabaseName" property="databaseName" />
+            <columnOverride column="QueryEngine" property="queryEngine" />
+            <columnOverride column="Role" property="role" />
+            <columnOverride column="Properties" property="properties" />
+            <columnOverride column="QuerySql" property="querySql" jdbcType="VARCHAR" />
+            <columnOverride column="ExecTime" property="execTime" />
+            <columnOverride column="QueryStatus" property="queryStatus" />
+            <columnOverride column="ResultFilePath" property="resultFilePath" />
+            <columnOverride column="LogPath" property="logPath" />
+            <columnOverride column="CsvPath" property="csvPath" />
+            <columnOverride column="XlsxPath" property="xlsxPath" />
+            <columnOverride column="Detail" property="detail" jdbcType="VARCHAR" />
+        </table>
+    </context>
+</generatorConfiguration>

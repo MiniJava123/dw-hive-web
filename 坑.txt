@@ -1,0 +1,5 @@
+双机情况下，前端同时发请求，多个不同Session，同时写HW_UserInfo，新用户可能写重
+SSO拦截/*，未配置健康监测URL
+FileSystem取文件Failed to find any Kerberos tgt
+Swallow报错
+查询历史很多ready

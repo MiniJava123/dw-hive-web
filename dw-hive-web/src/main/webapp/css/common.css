@@ -1,0 +1,149 @@
+input[type=checkbox].ace.ace-switch.ace-switch-3 + .lbl::after {
+    content: "\f023";
+}
+input[type=checkbox].ace.ace-switch.ace-switch-3:checked + .lbl::after {
+    content: "\f09c";
+}
+.gritter-msg {
+    top: 30px;
+    left: -50px;
+    width: 350px;
+    opacity: 0.8;
+}
+.table [class*=" icon-"],
+.table [class^="icon-"] {
+    vertical-align: middle;
+}
+.table thead > tr > th {
+    background-color: #E5E5E5; /*! #EEF4F9 */
+}
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td {
+    vertical-align: middle;
+    padding: 4px;
+}
+.table-33h thead > tr > th,
+.table-33h tbody > tr > th,
+.table-33h tfoot > tr > th,
+.table-33h thead > tr > td,
+.table-33h tbody > tr > td,
+.table-33h tfoot > tr > td {
+    height: 33px;
+}
+.margin-10 {
+    margin-left: 10px;
+}
+.margin-20 {
+    margin-left: 20px;
+}
+.margin-30 {
+    margin-left: 30px;
+}
+.btn-running {
+    line-height: 24px;
+    margin-left: 5px;
+}
+.modal-dialog.sql-modal {
+    width: 800px;
+}
+.modal-body {
+    max-height: 80vh;
+}
+.pointer-effect {
+    cursor: pointer;
+}
+.pointer-effect:hover {
+/*    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);*/
+    opacity: .8;
+}
+.ui-tooltip, .ui-tooltip-arrow:after {
+    background: white;
+}
+.ui-tooltip {
+    padding: 6px 20px;
+    color: black;
+    border-radius: 20px;
+    box-shadow: 0 0 7px black;
+    max-width: 600px;
+}
+.ui-tooltip-arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+}
+.ui-tooltip-arrow.top {
+    top: -16px;
+    bottom: auto;
+}
+.ui-tooltip-arrow.left {
+    left: 20%;
+}
+.ui-tooltip-arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+}
+.ui-tooltip-arrow.top:after {
+    bottom: -20px;
+    top: auto;
+}
+.auto-overflow {
+    overflow:auto
+}
+.not-display {
+    display: none;
+}
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+    font-family: Microsoft YaHei, '微软雅黑', '黑体', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.margin-top-7 {
+    margin-top: 7px;
+}
+
+#feed-back {
+    height: 300px;
+    resize: none;
+}
+
+.qq-support {
+    margin: 10px;
+    font-size: 17px;
+}
+
+.query-img-size {
+    width: 950px;
+    height: 400px;
+}
+
+.bs-sidenav {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+

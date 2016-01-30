@@ -1,0 +1,118 @@
+<div class="row" ng-controller="queryCtrl">
+    <div class="col-xs-12 query-env">
+        <!-- 数据库选择控件 -->
+        <label class="database-label" for="database">数据库：</label>
+        <select class="database-select" id="database"
+                ng-model="selectedDatabase" ng-options="database for database in allDatabases" ng-change="saveDatabase(selectedDatabase)"></select>
+
+        <!-- 执行引擎选择控件 -->
+        <label class="mode-label" for="mode">执行引擎：</label>
+        <select class="mode-select" id="mode"
+                ng-model="selectedQueryEngine" ng-options="mode | lowercase for mode in allQueryEngines" ng-change="saveQueryEngine(selectedQueryEngine)"></select>
+
+        <!-- 角色选择控件 -->
+        <label class="username-label" for="username">角色：</label>
+        <select class="username-select" id="username"
+                ng-model="selectedQueryRole" ng-options="username for username in allQueryRoles" ng-change="saveRole(selectedQueryRole)"></select>
+
+        <!-- SQL格式提示 -->
+        <label class="username-label" for="sqlHelp">帮助：</label>
+        <span class="help-button pointer-effect" id="sqlHelp"
+              popover-title="帮助"
+              popover="可输入多SQL，每条语句须以分号结尾。可执行选中的一条或多条SQL，但必须完整选中。"
+              popover-trigger="mouseenter" popover-placement="right">
+            ?
+        </span>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="tabbable">
+            <tabset>
+                <!-- SQL查询Tab列表 -->
+                <tab ng-repeat="tab in tabList" active="tab.tabActive">
+                    <tab-heading class="tab-title pointer-effect">
+                        <i class="{{tab.statusClass}} bigger-120"></i>&nbsp;{{tab.tabTitle}}
+                        <button type="button" class="close close-tab-btn" ng-click="closeTab($index)">
+                            <i class="icon-remove smaller-70"></i>
+                        </button>
+                    </tab-heading>
+                    <textarea ui-codemirror="{ onLoad: codemirrorLoaded }" placeholder="使用ALT-/进行代码提示"></textarea>
+
+                    <div class="space space-6"></div>
+                    <label>下载行数限制：
+                        <select ng-model="tab.rowLimit" ng-options="limit for limit in rowLimits"></select>
+                    </label>
+
+                    <div class="help-block"></div>
+                    <button type="button" class="btn btn-sm btn-danger pull-right query-stop-btn"
+                            ng-disabled="!tab.stopButton" ng-click="stopQuery(tab)">
+                        <i class="icon-stop"></i>&nbsp;停止
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-primary pull-right query-submit-btn"
+                            ng-disabled="!tab.execButton" ng-click="runQuery(tab)">
+                        <i class="icon-play"></i>&nbsp;执行【Ctrl-Enter】
+                    </button>
+
+					<button type="button" class="btn btn-sm btn-warning pull-right log-retry-btn"
+                            ng-disabled="!tab.retryLogButton" ng-click="retryLog(tab)">
+                        <i class="icon-repeat"></i>&nbsp;重试(因网络原因)
+                    </button>
+                    <div class="space space-6"></div>
+                    <tabset>
+                        <!-- 分开显示每个sql的任务日志 -->
+                        <tab ng-repeat="resultTab in tab.resultTabs" ng-click="renderTab(resultTab)" ng-hide="resultTab.emptyColumn" active="resultTab.tabActive">
+                            <tab-heading class="pointer-effect">
+                                <span>
+                                    <i class="infobox-black {{resultTab.icon}} bigger-120"></i>
+                                    &nbsp;<strong>{{resultTab.title}}</strong>
+                                </span>
+                            </tab-heading>
+                            <div ng-switch="resultTab.type">
+                                <div class="result-log" ng-switch-when="log"
+                                     id="result-log-{{tab.tabId}}-{{resultTab.queryIdx}}">
+                                    <h4 class="header smaller lighter blue">
+                                        查询信息：
+                                    </h4>
+
+                                    <div>
+                                        <p>
+                                            数据库：{{resultTab.execInfo.databaseName}}，执行引擎：{{resultTab.execInfo.execMode}}，角色：{{resultTab.execInfo.roleName}}
+                                        </p>
+                                        <pre><div ng-repeat="(k, v) in resultTab.execInfo.properties">set {{k}}={{v}};<br /></div>{{resultTab.execInfo.hql}};</pre>
+                                    </div>
+                                    <h4 class="header smaller lighter blue">
+                                       查询日志：
+                                    </h4>
+                                    <pre>{{resultTab.log}}</pre>
+                                </div>
+                                <div class="row" ng-switch-when="result">
+                                    <div class="col-xs-12">
+                                        <div class="btn-toolbar">
+                                            <button class="btn btn-xs btn-primary" ng-show="resultTab.csvPath != ''" 
+                                                    ng-click="downloadCsv(resultTab.queryId)">
+                                                <i class="icon-download-alt bigger-110"></i>&nbsp;下载CSV
+                                            </button>&nbsp;<button class="btn btn-xs btn-primary" ng-show="resultTab.xlsxPath != ''" 
+                                                    ng-click="downloadXlsx(resultTab.queryId)">
+                                                <i class="icon-download-alt bigger-110"></i>&nbsp;下载Excel
+                                            </button>
+                                        </div>
+                                        <hr/>
+                                        <table cellpadding="0" cellspacing="0" border="0" class="display"
+                                               id="data-tables-{{tab.tabId}}-{{resultTab.queryIdx}}"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </tab>
+                <!-- 新添加一个查询tab -->
+                <tab ng-click="addTab()">
+                    <tab-heading class="pointer-effect">
+                        <i class="icon-plus bigger-120"></i>&nbsp;<strong>新查询</strong>
+                    </tab-heading>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div><!-- /row -->

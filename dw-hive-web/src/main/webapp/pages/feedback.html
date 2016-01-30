@@ -1,0 +1,22 @@
+<div class="page-content" ng-controller="ReplyCtrl">
+    <div class="page-header">
+        <h1>
+            意见与反馈
+        </h1>
+    </div>
+
+    <div class="col-sm-offset-3 col-sm-6" ng-class="cursorStyle">
+        <div class="tips align-center">
+            感谢你使用 hive-web 服务！请告诉我们你的意见和建议，我们会参考你的反馈不断优化产品。<br>
+        </div>
+
+        <br>
+        <textarea class="form-control limited" id="feed-back" maxlength="1000" ng-model="reply">
+        </textarea>
+        <p>还可以填写<span class="red"><strong>{{1000-reply.length}}</strong></span>字！</p>
+        <br>
+
+        <button class="btn btn-primary pull-right" ng-click="submit()">提交</button>
+    </div>
+</div>
+

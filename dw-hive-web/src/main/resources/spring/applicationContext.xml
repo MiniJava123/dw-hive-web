@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop.xsd
+                        http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.dianping.dw.hive" />
+
+    <import resource="classpath:pigeon/provider.xml" />
+
+    <aop:aspectj-autoproxy />
+
+    <!-- lion bean -->
+    <bean name="placeholder" lazy-init="false" class="com.dianping.lion.client.InitializeConfig">
+        <property name="propertiesPath" value="lion/dw-hive-web-applicationContext.properties" />
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${dw-hive-web.mysql.jdbc.driver}"></property>
+        <property name="jdbcUrl" value="${dw-hive-web.mysql.jdbc.url}"></property>
+        <property name="user" value="${dw-hive-web.mysql.jdbc.username}"></property>
+        <property name="password" value="${dw-hive-web.mysql.jdbc.password}"></property>
+        <property name="initialPoolSize" value="${dw-hive-web.mysql.initialPoolSize}"></property>
+        <property name="minPoolSize" value="${dw-hive-web.mysql.minPoolSize}"></property>
+        <property name="maxPoolSize" value="${dw-hive-web.mysql.maxPoolSize}"></property>
+        <property name="maxIdleTime" value="${dw-hive-web.mysql.maxIdleTime}"></property>
+        <property name="acquireIncrement" value="${dw-hive-web.mysql.acquireIncrement}"></property>
+        <property name="idleConnectionTestPeriod" value="${dw-hive-web.mysql.idleConnectionTestPeriod}"></property>
+        <property name="acquireRetryAttempts" value="${dw-hive-web.mysql.acquireRetryAttemps}"></property>
+        <property name="breakAfterAcquireFailure" value="${dw-hive-web.mysql.breakAfterAcquireFailure}"></property>
+        <property name="maxStatements" value="${dw-hive-web.mysql.maxStatements}"></property>
+        <property name="testConnectionOnCheckout" value="${dw-hive-web.mysql.testConnectionOnCheckout}"></property>
+    </bean>
+
+    <tx:annotation-driven />
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.dianping.dw.hive.model" />
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.dianping.dw.hive.mapper" />
+    </bean>
+
+    <bean id="mysqlJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>

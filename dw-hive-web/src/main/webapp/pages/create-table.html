@@ -1,0 +1,381 @@
+<div class="row" ng-controller="createTableCtrl">
+    <div class="space-8"></div>
+    <div class="col-xs-12  ">
+        <form class="form-horizontal row">
+            <label class="col-sm-2 no-padding-right  smaller lighter blue margin-top-5">
+                <span> <strong>建表与上传数据的用户角色 : </strong></span>
+            </label>
+            <div class="col-sm-2  no-padding-left smaller lighter blue">
+                <select class="username-select" id="username"
+                        ng-model="selectedRole"
+                        ng-options="username for username in allQueryRoles" ></select>
+                <span class=" light-red " tooltip-placement="top" tooltip-html-unsafe="用户角色必选">
+                    <strong>*</strong>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="space-16"></div>
+    <div class="space-16"></div>
+    <div class="col-xs-12  ">
+        <tabset>
+            <tab heading="创建临时表">
+                <div class="row" >
+                    <div class="col-xs-12">
+                        <form class="form-horizontal row">
+                            <div class="col-xs-12  col-sm-1"></div>
+                            <div class="col-xs-12  col-sm-10">
+                                <h4 class="header smaller lighter blue">
+                                    <span> <strong>表信息</strong>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="col-xs-12  col-sm-1"></div>
+                        </form>
+                        <form class="form-horizontal row">
+                            <div class="form-group">
+                                <div class="col-xs-12  col-sm-1"></div>
+                                <label for="inputWarning1" class="col-xs-12 col-sm-1 control-label no-padding-right">数据库名:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" id="inputWarning1" ng-model="createTableInfo.databaseName"
+                                           class="width-90" >
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="数据库名必填"> <strong>*</strong></span>
+                                    <!--<span class="help-button pointer-effect" id="sqlHelp"-->
+                                          <!--popover-title="提示"-->
+                                          <!--popover="临时表必须创建在tmp库下，查询时使用  tmp.table 即可！"-->
+                                          <!--popover-trigger="mouseenter" popover-placement="right">-->
+                                        <!--?-->
+                                    <!--</span>-->
+                                </div>
+                                <label for="inputWarning2"
+                                       class="col-xs-12 col-sm-1 control-label no-padding-right">表名:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" id="inputWarning2" class="width-90"
+                                           ng-model="createTableInfo.tableName">
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="表名必填"> <strong>*</strong> </span>
+                                </div>
+                                <label for="inputWarning3" class="col-xs-12 col-sm-1 control-label no-padding-right">表描述信息:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" id="inputWarning3" ng-model="createTableInfo.tableComment"
+                                           class="width-90">
+                                </div>
+                                <div class="col-xs-12  col-sm-1"></div>
+                            </div>
+                        </form>
+                        <form class="form-horizontal row">
+                            <div class="form-group">
+                                <div class="col-xs-12  col-sm-1"></div>
+                                <label for="inputWarning4" class="col-xs-12 col-sm-1 control-label no-padding-right">列分隔符:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <select id="inputWarning4" ng-model="createTableInfo.colSeparator" class="width-90"
+                                            ng-options="separator for separator in columnSeparator"></select>
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="列分隔符必填"><strong>*</strong> </span>
+                                </div>
+                                <label for="inputWarning5" class="col-xs-12 col-sm-1 control-label no-padding-right">是否为外部表:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <label>
+                                        <input name="switch-field-1" id="inputWarning5"
+                                               class="ace ace-switch ace-switch-5" type="checkbox"
+                                               ng-model="createTableInfo.isExternal">
+                                        <span class="lbl"></span>
+                                    </label>
+                                </div>
+                                <label for="inputWarning6" class="col-xs-12 col-sm-1 control-label no-padding-right">表存储路径</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" id="inputWarning6" ng-model="createTableInfo.tableStoragePath"
+                                           class="width-90">
+                                </div>
+                                <div class="col-xs-12  col-sm-1"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12">
+                        <form class="form-horizontal row">
+                            <div class="col-xs-12  col-sm-1"></div>
+                            <div class="col-xs-12  col-sm-10">
+                                <h4 class="header smaller lighter blue">
+                                    <span> <strong>文件存储格式</strong>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="col-xs-12  col-sm-1"></div>
+                        </form>
+                        <form class="form-horizontal row">
+                            <div class="form-group">
+                                <div class="col-xs-12  col-sm-1"></div>
+                                <label for="inputWarning7" class="col-xs-12 col-sm-1 control-label no-padding-right">FileFormat:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <select id="inputWarning7" ng-model="createTableInfo.fileFormat" class="width-90"
+                                            ng-options="format for format in fileFormats"></select>
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="列分隔符必填"><strong>*</strong> </span>
+                                </div>
+                                <label ng-show="isShowFormat" for="inputWarning8"
+                                       class="col-xs-12 col-sm-1 control-label no-padding-right">InputFormat:</label>
+
+                                <div ng-show="isShowFormat" class="col-xs-12  col-sm-2">
+                                    <input type="text" id="inputWarning8" ng-model="createTableInfo.inputFormat"
+                                           class="width-90">
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="InputFormat必填"><strong>*</strong> </span>
+                                </div>
+                                <label ng-show="isShowFormat" for="inputWarning9"
+                                       class="col-xs-12 col-sm-1 control-label no-padding-right">OutputFormat:</label>
+
+                                <div ng-show="isShowFormat" class="col-xs-12  col-sm-2">
+                                    <input type="text" id="inputWarning9" ng-model="createTableInfo.outputFormat"
+                                           class="width-90">
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="OutputFormat必填"><strong>*</strong> </span>
+                                </div>
+                                <div class="col-xs-12  col-sm-1"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12">
+                        <form class="form-horizontal row">
+                            <div class="col-xs-12  col-sm-1"></div>
+                            <div class="col-xs-12  col-sm-10">
+                                <h4 class="header smaller lighter blue">
+                                    <span> <strong>添加字段</strong>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="col-xs-12  col-sm-1"></div>
+                        </form>
+                        <form class="form-horizontal row">
+                            <div class="form-group" ng-repeat="col in createTableInfo.columnList">
+                                <div class="col-xs-12  col-sm-1"></div>
+                                <label class="col-xs-12 col-sm-1 control-label no-padding-right">字段名:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" ng-model="col.columnName" class="width-90">
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="字段名必填"><strong>*</strong> </span>
+                                </div>
+                                <label class="col-xs-12 col-sm-1 control-label no-padding-right">字段类型:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <select ng-model="col.columnType" class="width-90"
+                                            ng-options="type for type in columnType"></select>
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="字段类型必填"><strong>*</strong> </span>
+                                </div>
+                                <label class="col-xs-12 col-sm-1 control-label no-padding-right">字段注释:</label>
+
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" ng-model="col.columnComment" class="width-90">
+                                    <span class=" light-red " tooltip-placement="top"
+                                          tooltip-html-unsafe="字段注释必填"><strong>*</strong> </span>
+                                </div>
+                                <div class="col-xs-12  col-sm-1">
+                                    <button class="btn-link " tooltip="删除字段" ng-click="deleteTableColumn($index)">
+                                        <i class="icon-remove bigger-130"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12  col-sm-1"></div>
+                                <div class="col-xs-12 col-sm-1 control-label no-padding-righ">
+                                    <button class="btn btn-inverse btn-xs" ng-click="addTableColumn()">添加字段</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12">
+                        <form class="form-horizontal row">
+                            <div class="col-xs-12  col-sm-1"></div>
+                            <div class="col-xs-12  col-sm-10">
+                                <h4 class="header smaller lighter blue">
+                                    <span> <strong>检查建表语句与执行建表</strong>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="col-xs-12  col-sm-1"></div>
+                        </form>
+                        <form class="form-horizontal row">
+                            <div class="col-xs-12  col-sm-1"></div>
+                            <div class="col-xs-12  col-sm-10">
+                                <button class="btn btn-primary btn-sm" ng-click="buildCreateTableSQL()">生成建表语句</button>
+                                <button class="btn btn-success btn-sm" ng-click="createTable()" 
+                                        ng-disabled="isDisabledCreateButton">执行建表</button>
+                            </div>
+                            <div class="col-xs-12  col-sm-1"></div>
+                        </form>
+                        <div class="space-10"></div>
+                        <form class="form-horizontal row">
+                            <div class="col-xs-12  col-sm-1"></div>
+                            <div class="col-xs-12  col-sm-10">
+                                <pre>{{ createTableInfo.createTableSql }}</pre>
+                            </div>
+                            <div class="col-xs-12  col-sm-1"></div>
+                        </form>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="上传临时表数据">
+                <div class="row" ng-controller="createTableCtrl">
+                    <div class="col-xs-12">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label  class="col-xs-12 col-sm-2 control-label no-padding-right">数据库名:</label>
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" ng-model="loadTableInfo.databaseName" class="width-90" >
+                                    <span class=" light-red " tooltip-placement="top" tooltip-html-unsafe="数据库名必填"> <strong>*</strong></span>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label  class="col-xs-12 col-sm-2 control-label no-padding-right">表名:</label>
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" ng-model="loadTableInfo.tableName" class="width-90">
+                                    <span class=" light-red " tooltip-placement="top" tooltip-html-unsafe="表名必填"> <strong>*</strong></span>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label  class="col-xs-12 col-sm-2 control-label no-padding-right">是否覆盖表数据:</label>
+                                <div class="col-xs-12  col-sm-2">
+                                    <label>
+                                        <input name="switch-field-1"
+                                               class="ace ace-switch ace-switch-5" type="checkbox"
+                                               ng-model="loadTableInfo.isOverWrite">
+                                        <span class="lbl"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label  class="col-xs-12 col-sm-2 control-label no-padding-right">分区条件(可选):</label>
+                                <div class="col-xs-12  col-sm-2">
+                                    <input type="text" ng-model="loadTableInfo.partition" class="width-90">
+                                    <!--<span class=" light-red " tooltip-placement="top" tooltip-html-unsafe="数据库名必填"> <strong>*</strong></span>-->
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label  class="col-sm-2 control-label no-padding-right">选择文件(可多选):</label>
+                                    <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                                    <div class="col-sm-2 control-label no-padding-right">
+                                        <input type="file" nv-file-select="" uploader="uploader" multiple  />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12" >
+
+                                    <!--<h3 class="col-sm-2">Upload queue</h3>-->
+                                    <label class="col-sm-4"></label>
+                                    <label class="col-sm-2 control-label no-padding-right">上传文件队列, 数量：[{{ uploader.queue.length }}]</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-7">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th width="50%">Name</th>
+                                                <th ng-show="uploader.isHTML5">Size</th>
+                                                <th ng-show="uploader.isHTML5">Progress</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in uploader.queue">
+                                                <td><strong>{{ item.file.name }}</strong></td>
+                                                <td ng-show="uploader.isHTML5" nowrap>{{
+                                                    item.file.size/1024/1024|number:2 }} MB
+                                                </td>
+                                                <td ng-show="uploader.isHTML5">
+                                                    <div class="progress" style="margin-bottom: 0;">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             ng-style="{ 'width': item.progress + '%' }">
+                                                             {{item.progress}}%
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span ng-show="item.isSuccess"><i
+                                                            class="icon-ok"></i></span>
+                                                    <span ng-show="item.isCancel"><i
+                                                            class="icon-ban-circle"></i></span>
+                                                    <span ng-show="item.isError"><i
+                                                            class="icon-remove"></i></span>
+                                                </td>
+                                                <td nowrap>
+                                                    <button type="button" class="btn btn-success btn-xs"
+                                                            ng-click="item.upload()"
+                                                            ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                        <span class="icon-upload"></span> Upload
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning btn-xs"
+                                                            ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                        <span class="icon-ban-circle "></span> Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-xs"
+                                                            ng-click="item.remove()">
+                                                        <span class="icon-trash "></span> Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                                    
+                                    <div class="col-xs-12">
+                                        <label class="col-sm-2 control-label no-padding-right">总上传进度:</label>
+                                        <div class="col-xs-7 margin-top-7">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                     ng-style="{ 'width': uploader.progress + '%' }">
+                                                    {{ uploader.progress }}%
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">-->
+                                            <!--<span class="glyphicon glyphicon-upload"></span> Upload all-->
+                                        <!--</button>-->
+                                        <!--<button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">-->
+                                            <!--<span class="glyphicon glyphicon-ban-circle"></span> Cancel all-->
+                                        <!--</button>-->
+                                        <!--<button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">-->
+                                            <!--<span class="glyphicon glyphicon-trash"></span> Remove all-->
+                                        <!--</button>-->
+                                    </div>
+
+                            </div>
+                        </form>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label  class="col-xs-12 col-sm-1 control-label no-padding-right"></label>
+                                <div class="col-xs-12  col-sm-2">
+                                    <button class="btn btn-primary btn-sm" ng-click="submitLoadData()">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>
+

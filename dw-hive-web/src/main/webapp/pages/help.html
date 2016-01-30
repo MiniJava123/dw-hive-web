@@ -1,0 +1,123 @@
+<div class="row" ng-controller="ReplyCtrl">
+    <div class="col-xs-12">
+        <div class="col-sm-10">
+            <div class="col-xs-12" id="query-step">
+                <div class="col-sm-11">
+                    <h4 class="header smaller lighter blue">
+                        <span><strong>查询步骤指引</strong></span>
+                    </h4>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <img class="query-img-size" src="../images/hive-web_1.jpg">
+                </div>
+                <div class="col-xs-12">
+                    <h5 class=""><strong>查询步骤如下：</strong></h5>
+                    <ol>
+                        <li>选择对应的数据库,执行引擎,用户权限角色(如果没有对应表的读权限, 请<a href="http://auth.data.dp/" target="_blank">申请</a>)；如果查询表的数据量不大的情况下，请尽量使用shark,查询速度相对较快！</li>
+                        <li>在查询tab页里输入需要执行的sql语句，对于多条语句使用分号隔开； 如果查询语句太多，可以打开多个tab页分别输入语句进行查询。</li>
+                        <li>语句输入完毕后，选择需要查询获取的记录数目，点击执行(快捷键：ctrl+enter)。</li>
+                        <li>点击执行后，在下方会立马出现sql查询的进度信息，信息会不断刷新。待执行结束后，显示结果的tab页会立马显示出来；在结果tab
+                            页里，显示了部分的结果数据；如果觉过数据量很大，请下载csv文件或者excel文件进行查看！</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="space-30"></div>
+            
+            <div class="col-xs-12" id="query-his-step">
+                <div class="col-sm-11">
+                    <h4 class="header smaller lighter blue">
+                        <span><strong>查看查询历史记录</strong></span>
+                    </h4>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <img class="query-img-size" src="../images/hive-web-his_1.jpg">
+                </div>
+                <div class="col-xs-12">
+                    <h5 class=""><strong>查询步骤如下：</strong></h5>
+                    <ol>
+                        <li>点击导航栏的 历史查询 ，会显示登录用户的所有的历史查询sql</li>
+                        <li>在表格的右上角搜索框里 可以通过关键字 快速查找出所需的sql语句</li>
+                        <li>每条查询语句都保存了csv和excel格式的结果文件，可以下载查看</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="space-30"></div>
+            
+            <div class="col-xs-12" id="create-tmp-table">
+                <div class="col-sm-11">
+                    <h4 class="header smaller lighter blue">
+                        <span><strong>创建临时表&上传数据</strong></span>
+                    </h4>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <img class="query-img-size" src="../images/hive-web-create_1.jpg">
+                </div>
+                <div class="col-xs-12">
+                    <h5 class=""><strong>创建临时表步骤如下：</strong></h5>
+                    <ol>
+                        <li>在最上方选择建表的用户身份</li>
+                        <li>填写需要创建的临时表相关信息：所在库，表名，列分隔符，文件存储格式，字段等等；星号标记的位置必须填写！</li>
+                        <li>信息输入完成后，点击生成建表语句，获取建表语句，检查语句的正确性</li>
+                        <li>语句确认无误后，点击执行建表</li>
+                    </ol>
+                </div>
+                
+                <div class="col-xs-12">
+                    <img class="query-img-size" src="../images/hive-web-upload_1.jpg">
+                </div>
+                <div class="col-xs-12">
+                    <h5 class=""><strong>临时表上传数据步骤如下：</strong></h5>
+                    <ol>
+                        <li>输入表信息，如果选择覆盖，即本次上传的数据将覆盖掉该表的历史数据</li>
+                        <li>选择数据文件，可以多选(注意文件的格式和字段分隔符和临时表信息一一对应)</li>
+                        <li>文件选择完毕后，点击upload，将文件上传到hdfs上(如果不需要上传了，可惜点击remove删除，cancel是取消上传过程)</li>
+                        <li>最后点击提交，完成数据Load到临时表的过程</li>
+                    </ol>    
+                </div>
+            </div>
+            
+            <div class="col-xs-12" id="common-ques">
+                <div class="col-sm-11">
+                    <h4 class="header smaller lighter blue">
+                        <span><strong>常见问题</strong></span>
+                    </h4>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="col-xs-12">
+                <ol>
+                    <li>如果发现点击执行后，日志显示一段时间后，日志中断刷新？</li>
+                        <p>出现这个问题的可能原因是 网络不好，导致定时发送请求到后端获取日志的过程停止；<br>解决办法： 点击 重试(因网络原因) 按钮</p>
+                    <li>如果发现提交的sql语句不需要在执行？</li>
+                        <p>直接点击stop停止查询，修改语句后 再次提交</p>
+                </ol>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="bs-sidebar affix">
+                <ul class="nav bs-sidenav">
+                    <li><button class="btn btn-link btn-sm" ng-click="goto('query-step')">查询步骤指引</button>
+                    </li>
+                    <li><button class="btn btn-link btn-sm" ng-click="goto('query-his-step')">查看查询历史记录</button>
+                    </li>
+                    <li><button class="btn btn-link btn-sm" ng-click="goto('create-tmp-table')">创建临时表</button>
+                    </li>
+                    <li><button class="btn btn-link btn-sm" ng-click="goto('common-ques')">常见问题</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
